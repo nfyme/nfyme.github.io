@@ -1,0 +1,103 @@
+ body {
+            background: #f8f9fa;
+        }
+        
+        .deep-zoom-gallery-container {
+            min-height: 100vh;
+        }
+        
+        .gallery-header {
+            padding: 3rem 0 2rem;
+        }
+        
+        .gallery-main-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+        
+        .gallery-main-description {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .gallery-row {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .pswp-gallery__item {
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            background: #f0f0f0;
+            height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pswp-gallery__item img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .pswp-gallery__item::after {
+            content: '🔍';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            text-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+        
+        .pswp-gallery__item:hover::after {
+            opacity: 0.8;
+        }
+        
+        .gallery-description {
+            padding: 1rem;
+        }
+        
+        .gallery-image-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+        
+        .gallery-image-description {
+            font-size: 1rem;
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 991px) {
+            .gallery-row .order-1,
+            .gallery-row .order-2 {
+                order: 1 !important;
+            }
+            
+            .gallery-description {
+                margin-top: 1.5rem;
+            }
+        }
+        
+        /* Улучшения для PhotoSwipe */
+        .pswp__img {
+            object-fit: contain;
+        }
