@@ -148,44 +148,33 @@
                     </div>
     </div>
 
-    <script type="module">
-        import PhotoSwipeLightbox from './js/photoswipe-lightbox.esm.js';
-        import PhotoSwipeDeepZoom from './js/photoswipe-deep-zoom-plugin.esm.js';
-        
-        const lightbox = new PhotoSwipeLightbox({
-            gallery: '#gallery',
-            children: '.pswp-gallery__item > a',
-            
-            pswpModule: () => import('./js/photoswipe.esm.min.js'),
-            
-            // Рекомендуемые настройки PhotoSwipe для этого плагина
-            allowPanToNext: false,
-            allowMouseDrag: true,
-            wheelToZoom: true,
-            zoom: false
-        });
-        
-        const deepZoomPlugin = new PhotoSwipeDeepZoom(lightbox, {
-            // Базовые настройки
-            tileSize: 256,
-            tileOverlap: 1,
-            fadeInDuration: 150,
-            
-            // Кэширование
-            cacheLimit: 200,
-            maxDecodingCount: 15,
-            minBatchRequestCount: 6,
-            
-            // Отображение
-            incrementalZoomButtons: true,
-            useLowResLayer: false,  // В рабочем примере так
-            forceWillChange: true,
-            
-            // Retina
-            maxTilePixelRatio: 1,
-        });
-        
-        lightbox.init();
-    </script>
+ <script type="module">
+import PhotoSwipeLightbox from './js/photoswipe-lightbox.esm.js';
+
+let deepZoomPlugin;
+
+const lightbox = new PhotoSwipeLightbox({
+    gallery: '#gallery',
+    children: '.pswp-gallery__item > a',
+
+    pswpModule: () => import('./js/photoswipe.esm.js'),
+
+    openPromise: () => {
+        if (!deepZoomPlugin) {
+            return import('./src/index.js').then((module) => {
+                deepZoomPlugin = new module.default(lightbox, {
+                });
+            });
+        }
+    },
+
+    allowPanToNext: false,
+    allowMouseDrag: true,
+    wheelToZoom: true,
+    zoom: false
+});
+
+lightbox.init();
+</script>
 </body>
 </html>
